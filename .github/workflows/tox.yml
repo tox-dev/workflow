@@ -87,7 +87,7 @@ jobs:
           || steps.discovered-tox.outputs.matrix
         }}
 
-    runs-on: Ubuntu-latest
+    runs-on: ubuntu-latest
 
     steps:
     - name: 🔎 Produce tox environment job matrix for GHA
@@ -131,12 +131,12 @@ jobs:
     name: >-
       ${{ inputs.tox-job-names-prefix }}
       ${{ matrix.custom-job-name && matrix.custom-job-name || matrix.toxenv }}
-      ${{ matrix.runs-on && matrix.runs-on || 'Ubuntu-latest' }}
+      ${{ matrix.runs-on && matrix.runs-on || 'ubuntu-latest' }}
 
     needs:
     - make-tox-env-matrix
 
-    runs-on: ${{ matrix.runs-on && matrix.runs-on || 'Ubuntu-latest' }}
+    runs-on: ${{ matrix.runs-on && matrix.runs-on || 'ubuntu-latest' }}
 
     strategy:
       matrix: ${{ fromJSON(needs.make-tox-env-matrix.outputs.matrix) }}
@@ -161,7 +161,7 @@ jobs:
     needs:
     - run-tox
 
-    runs-on: Ubuntu-latest
+    runs-on: ubuntu-latest
 
     steps:
     - name: Decide whether the needed jobs succeeded or failed
