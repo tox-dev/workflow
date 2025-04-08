@@ -43,6 +43,14 @@ on:
           to retrieve the project from (defaults to `*.tar.gz`)
         required: false
         type: string
+      built-wheel-names:
+        default: >-
+          *.whl
+        description: >-
+          A glob for the built distributions in the artifact
+          to test (defaults to `*.whl`)
+        required: false
+        type: string
 
       min-python:
         default: 'None'
@@ -148,6 +156,7 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
         target: ${{ matrix.toxenv }}
+        built-wheel-names: ${{ inputs.built-wheel-names }}
         source-tarball-name: ${{ inputs.source-tarball-name }}
         workflow-artifact-name: ${{ inputs.workflow-artifact-name }}
       id: tox
