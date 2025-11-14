@@ -197,6 +197,7 @@ jobs:
             (
               startsWith(inputs.python-version, '~')
             ) ||
+            endsWith(inputs.python-version, '-dev') ||
             contains(inputs.python-version, 'alpha')
           ) && true || false
       }}
