@@ -480,4 +480,15 @@ jobs:
         report_type: test_results  # Toggle from "coverage" to "tests" mode
         token: ${{ secrets.codecov-token }}
 
+    - name: 🪝 Invoke the in-repo `post-tox-job` hook (if exists)
+      id: hook-post-tox-job
+      if: >-  # `hashFiles()` is used as a rudimentary `file.exists()`
+        hashFiles(
+          '.github/reusables/tox-dev/workflow/reusable-tox/hooks/post-tox-job/action.yml'
+        ) != ''
+      uses: ./.github/reusables/tox-dev/workflow/reusable-tox/hooks/post-tox-job
+      with:
+        calling-job-context: ${{ toJSON(inputs) }}
+        job-dependencies-context: ${{ inputs.job-dependencies-context }}
+
 ...
