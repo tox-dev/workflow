@@ -157,8 +157,10 @@ env:
   PYTHONUTF8: 1
   TOX_PARALLEL_NO_SPINNER: 1
   TOX_TESTENV_PASSENV: >-  # Make tox-wrapped tools see color requests
+    CI
     COLOR
     FORCE_COLOR
+    GITHUB_*
     MYPY_FORCE_COLOR
     NO_COLOR
     PIP_DISABLE_PIP_VERSION_CHECK
