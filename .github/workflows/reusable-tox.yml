@@ -451,7 +451,9 @@ jobs:
       # NOTE: `codecov/test-results-action` is not used because it has a bug in
       # NOTE: the architecture detection logic that leads it to download an
       # NOTE: incompatible executable built for x86_64 under arm64.
+      # yamllint disable rule:line-length
       # Ref: https://github.com/codecov/test-results-action/issues/121#issuecomment-2859242703
+      # yamllint enable rule:line-length
       uses: codecov/codecov-action@v5
       with:
         disable_search: true
