@@ -249,6 +249,7 @@ jobs:
       uses: ./.github/reusables/tox-dev/workflow/reusable-tox/hooks/post-src-checkout  # yamllint disable-line rule:line-length
       with:
         calling-job-context: ${{ toJSON(inputs) }}
+        current-job-steps: ${{ toJSON(steps) }}
         job-dependencies-context: ${{ inputs.job-dependencies-context }}
 
     - name: Set up pip cache
@@ -338,6 +339,7 @@ jobs:
       uses: ./.github/reusables/tox-dev/workflow/reusable-tox/hooks/prepare-for-tox-run  # yamllint disable-line rule:line-length
       with:
         calling-job-context: ${{ toJSON(inputs) }}
+        current-job-steps: ${{ toJSON(steps) }}
         job-dependencies-context: ${{ inputs.job-dependencies-context }}
     - name: >-
         Run tox envs: `${{ env.TOXENV }}`
@@ -366,6 +368,7 @@ jobs:
       uses: ./.github/reusables/tox-dev/workflow/reusable-tox/hooks/post-tox-run
       with:
         calling-job-context: ${{ toJSON(inputs) }}
+        current-job-steps: ${{ toJSON(steps) }}
         job-dependencies-context: ${{ inputs.job-dependencies-context }}
 
     - name: Produce markdown test summary from JUnit
@@ -489,6 +492,7 @@ jobs:
       uses: ./.github/reusables/tox-dev/workflow/reusable-tox/hooks/post-tox-job
       with:
         calling-job-context: ${{ toJSON(inputs) }}
+        current-job-steps: ${{ toJSON(steps) }}
         job-dependencies-context: ${{ inputs.job-dependencies-context }}
 
 ...
