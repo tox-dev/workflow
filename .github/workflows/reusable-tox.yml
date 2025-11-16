@@ -417,12 +417,13 @@ jobs:
       run: >-
         {
           echo '> [!IMPORTANT]';
-          echo '> The main tox command failed. It has been restarted with';
-          echo '> maximum context extraction to help you troubleshoot the';
-          echo '> issue. We have intentionally marked the second run as';
-          echo '> failing. Be sure to carefully compare the first and the';
-          echo '> second invocations to learn if the tests are flaky and';
-          echo '> hopefully guide you in fixing them. Cheers! 💛💙'
+          echo -n '> The main tox command failed. It has been restarted with ';
+          echo -n 'maximum context extraction to help you troubleshoot the ';
+          echo -n 'issue. We have intentionally marked the second run as ';
+          echo -n 'failing. Be sure to carefully compare the first and the ';
+          echo -n 'second invocations to learn if the tests are flaky and ';
+          echo 'hopefully guide you in fixing them. Cheers!'
+          echo '> 💛💙'
           echo;
           echo;
         } | tee -a "${GITHUB_STEP_SUMMARY}"
