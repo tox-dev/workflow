@@ -223,13 +223,13 @@ jobs:
         Switch to using Python v${{ inputs.python-version }}
         by default
       id: python-install
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@v6
       with:
         python-version: ${{ inputs.python-version }}
 
     - name: Grab the source from Git
       if: inputs.source-tarball-name == ''
-      uses: actions/checkout@v4
+      uses: actions/checkout@v5
       with:
         fetch-depth: ${{ inputs.checkout-src-git-fetch-depth }}
         ref: ${{ inputs.checkout-src-git-committish }}
@@ -300,7 +300,7 @@ jobs:
     - name: Download all the dists
       if: >-
         inputs.built-wheel-names != ''
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v6
       with:
         name: ${{ inputs.dists-artifact-name }}
         path: dist/
