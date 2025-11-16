@@ -412,7 +412,7 @@ jobs:
     - name: Re-run the failing tests with maximum verbosity
       if: >-
         !cancelled()
-        && failure()
+        && steps.tox-run.outcome == 'failure'
         && inputs.tox-rerun-posargs != ''
       run: >-  # `exit 1` makes sure that the job remains red with flaky runs
         python -Xutf8 -Im
