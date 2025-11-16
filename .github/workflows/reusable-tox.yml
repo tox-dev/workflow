@@ -371,6 +371,26 @@ jobs:
         current-job-steps: ${{ toJSON(steps) }}
         job-dependencies-context: ${{ inputs.job-dependencies-context }}
 
+    - name: Explain re-runing the failing tests
+      if: >-
+        !cancelled()
+        && steps.tox-run.outcome == 'failure'
+        && inputs.tox-rerun-posargs != ''
+      run: >-
+        {
+          echo '> [!IMPORTANT]';
+          echo -n '> The main tox command failed. It has been restarted with ';
+          echo -n 'maximum context extraction to help you troubleshoot the ';
+          echo -n 'issue. We have intentionally marked the second run as ';
+          echo -n 'failing. Be sure to carefully compare the first and the ';
+          echo -n 'second invocations to learn if the tests are flaky and ';
+          echo 'hopefully guide you in fixing them. Cheers!'
+          echo '> 💛💙'
+          echo;
+          echo;
+        } | tee -a "${GITHUB_STEP_SUMMARY}"
+      shell: bash -eEuo pipefail {0}
+
     - name: Produce markdown test summary from JUnit
       if: >-
         !cancelled()
@@ -409,25 +429,6 @@ jobs:
         && steps.tox-run.outputs.codecov-flags != 'MyPy'
       run: >-
         cat code-coverage-results.md >> "${GITHUB_STEP_SUMMARY}"
-    - name: Explain re-runing the failing tests
-      if: >-
-        !cancelled()
-        && steps.tox-run.outcome == 'failure'
-        && inputs.tox-rerun-posargs != ''
-      run: >-
-        {
-          echo '> [!IMPORTANT]';
-          echo -n '> The main tox command failed. It has been restarted with ';
-          echo -n 'maximum context extraction to help you troubleshoot the ';
-          echo -n 'issue. We have intentionally marked the second run as ';
-          echo -n 'failing. Be sure to carefully compare the first and the ';
-          echo -n 'second invocations to learn if the tests are flaky and ';
-          echo 'hopefully guide you in fixing them. Cheers!'
-          echo '> 💛💙'
-          echo;
-          echo;
-        } | tee -a "${GITHUB_STEP_SUMMARY}"
-      shell: bash -eEuo pipefail {0}
     - name: Re-run the failing tests with maximum verbosity
       if: >-
         !cancelled()
