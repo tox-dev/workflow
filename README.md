@@ -4,6 +4,10 @@
 
 # `tox-dev/workflow@release/v1`
 
+> [!tip]
+> The hooks are invoked unconditionally if they exist, unless the
+> workflow run is cancelled.
+
 [tox-dev badge]:
 https://img.shields.io/badge/project-yellow?label=tox-dev&labelColor=c3cc39&color=7f833e
 
