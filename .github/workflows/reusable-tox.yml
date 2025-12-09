@@ -365,6 +365,7 @@ jobs:
       id: hook-post-tox-run
       if: >-  # `hashFiles()` is used as a rudimentary `file.exists()`
         !cancelled()
+        && steps.tox-run.outcome != 'skipped'
         && hashFiles(
           '.github/reusables/tox-dev/workflow/reusable-tox/hooks/post-tox-run/action.yml'
         ) != ''
